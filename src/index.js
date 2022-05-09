@@ -204,24 +204,15 @@ const createDomNode = (element, innerHTML, ...classes) => {
 }
 
 
-// const testCapsLock = (event) => {
-//     if (event.getModifierState('CapsLock')) {
-//         document.querySelector('.caps_icon').classList.add('caps_on')
-//     }
-//     else {
-//         document.querySelector('.caps_icon').classList.remove('caps_on')
-//     }
-// }
-
-
-
 class KeyBoard {
     constructor() {
+        this.alt = false
+        this.ctrl = false
+        this.home = true
         this.lang = 'en';
         this.caps = 'off';
         this.shift = false;
 
-        this.alt = false
     }
 
     //CREATE KEYS

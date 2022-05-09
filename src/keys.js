@@ -70,6 +70,4 @@ const keyData = [
     { key: '▼', code: 'ArrowDown', noType: true },
     { key: '►', code: 'ArrowRight', noType: true }],
 ];
-
-
 export default keyData
