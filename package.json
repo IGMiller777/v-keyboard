@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "v-keyboard",
   "version": "1.0.0",
   "description": "",
@@ -16,6 +17,8 @@
     "url": "https://github.com/IGMiller777/v-keyboard/issues"
   },
   "homepage": "https://github.com/IGMiller777/v-keyboard#readme",
+=======
+>>>>>>> 05c94642170d2ec7703f695e57a78a228b54cc9e
   "devDependencies": {
     "eslint": "^8.15.0"
   }
