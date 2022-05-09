@@ -201,13 +201,14 @@ const keyData = [
     [{ key: 'Ctrl', code: 'ControlLeft', class: 'key-leftctrl', noType: true }, { key: { ru: 'RU', en: 'EN' }, code: 'Lang', class: 'key-lang', noType: true }, { key: 'Alt', code: 'AltLeft', class: 'key-leftalt', noType: true }, { key: ' ', code: 'Space', class: 'key-space' }, { key: 'Alt', code: 'AltRight', class: 'key-rightalt', noType: true }, { key: 'Ctrl', code: 'ControlRight', class: 'key-rightctrl', noType: true }, { key: '◄', code: 'ArrowLeft', noType: true }, { key: '▼', code: 'ArrowDown', noType: true }, { key: '►', code: 'ArrowRight', noType: true }],
 ];
 
+// createDom
 
-function createDomNode(element, innerHTML, ...tyles) {
+
+function createDom(element, innerHTML, ...tyles) {
     switch (element) {
         case "backspace":
             keyElement.classList.add("keyBoar-key--wide");
             keyElement.innerHTML = createIconHTML("backspace");
-
             keyElement.addEventListener("click", () => {
                 this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
                 this._triggerEvent("oninput");
@@ -264,16 +265,15 @@ class KeyBoard {
         this.shift = false;
 
     }
-
-    generateKeyBoard() {
-        const keyboard = createDomNode('div', '', 'keyboard');
-        const container = createDomNode('div', '', 'keyboard-container');
-        this.languageCheck();
+    createKey() {
+        const keyboard = createDom('div', '', 'keyboard');
+        const container = createDom('div', '', 'keyboard-container');
+        this.langS();
         for (let i = 0; i < keyData.length; i += 1) {
-            const row = createDomNode('div', '', 'keyboard-row');
+            const row = createDom('div', '', 'keyboard-row');
             keyData[i].forEach((e) => {
                 const keyLabel = (e.key.ru && e.key.en) ? e.key[this.lang] : e.key;
-                const key = createDomNode('div', keyLabel, 'key');
+                const key = createDom('div', keyLabel, 'key');
                 if (e.class) key.classList.add(e.class);
                 key.dataset.code = e.code;
                 if (e.key.ru && e.key.en) {
@@ -294,17 +294,17 @@ class KeyBoard {
         keyboard.append(container);
         return keyboard;
     }
-
-    // CHECKING LANG \
-
-    languageCheck() {
+    langS() {
         if (localStorage.getItem('lang')) {
             this.lang = localStorage.getItem('lang')
         } else {
             localStorage.setItem('lang', this.lang)
         }
     }
-    languageChange(event) {
+    logF() {
+        console.log('BIIIIII');
+    }
+    langCh(event) {
         if (this.lang === 'en') {
             this.lang = 'ru'
         }
@@ -312,10 +312,10 @@ class KeyBoard {
             this.lang = 'en'
         }
         localStorage.setItem('lang', this.lang)
-        this.updateKeyboard(event)
+        this.updateKeys(event)
     }
 
-    capsLockIcon() {
+    capsIc() {
         if (this.caps === 'on') {
             document.querySelector('.caps_icon').classList.add('caps_on');
         } else {
@@ -323,19 +323,24 @@ class KeyBoard {
         }
     }
 
-    changeCapsLock(event) {
+    changeCaps(event) {
         if (this.caps === 'on') {
             this.caps = 'off'
         } else {
             this.caps = 'on'
         }
-        this.capsLockIcon()
-        this.updateKeyboard(event)
+        this.capsIc()
+        this.updateKeys(event)
     }
-
-    // UPDATING 
-
-    updateKeyboard(event) {
+    removeShift(event) {
+        if (this.shift) {
+            this.shift = !this.shift;
+            document.querySelector('.key_leftshift').classList.remove('active');
+            document.querySelector('.key_rightshift').classList.remove('active');
+            this.updateKeys(event);
+        }
+    }
+    updateKeys(event) {
         const { lang } = this
         if (event.shiftKey || this.shift) {
             document.querySelectorAll('.key').forEach((el) => {
@@ -363,48 +368,34 @@ class KeyBoard {
         }
     }
 
-    removeShift(event) {
-        if (this.shift) {
-            this.shift = !this.shift;
-            document.querySelector('.key_leftshift').classList.remove('active');
-            document.querySelector('.key_rightshift').classList.remove('active');
-            this.updateKeyboard(event);
-        }
-    }
-
-
-    logF() {
-        console.log('BIIIIII');
-    }
-
 
 }
 
 const title = 'Keyboard'
 const { body } = document
-const textField = createDomNode('textarea', '', 'textfield')
+const textField = createDom('textarea', '', 'textfield')
 const keyboard = new KeyBoard()
 
-const keyPress = (event, button, code) => {
+function keyPress(event, button, code) {
     let text = ''
     let cursor = textField.selectionStart;
     event.preventDefault()
     textField.focus()
 
     if (code === 'CapsLock') {
-        keyboard.changeCapsLock(event)
+        keyboard.changeCaps(event)
     }
     if ((code === 'AltLeft' && (event.shiftKey || keyboard.shift))
         || (code === 'AltRight' && (event.shiftKey || keyboard.shift))
         || (code === 'ShiftLeft' && event.altKey)
         || (code === 'ShiftRight' && event.altKey)
         || (code === 'Lang')) {
-        keyboard.languageChange(event)
+        keyboard.langCh(event)
         keyboard.removeShift(event)
     }
 
     if (code === 'ShiftLeft' || code === 'ShiftRight') {
-        keyboard.updateKeyboard(event);
+        keyboard.updateKeys(event);
     }
 
     // ARROWWWSS
@@ -459,8 +450,6 @@ const keyPress = (event, button, code) => {
         text = button.textContent;
         keyboard.removeShift(event);
     }
-
-
     if (text) {
         let textBeforeCursor = textField.value.substring(0, cursor);
         const textAfterCursor = textField.value.substring(textField.selectionEnd);
@@ -477,11 +466,10 @@ const keyPress = (event, button, code) => {
     }
 }
 
-//  CREATING
-const createHeader = () => {
-    const header = createDomNode('div', '', 'header')
-    header.append(createDomNode('h1', title, 'header__text'));
-    header.append(createDomNode('div', '', 'subheading'));
+function createHeader() {
+    const header = createDom('div', '', 'header')
+    header.append(createDom('h1', title, 'header__text'));
+    header.append(createDom('div', '', 'subheading'));
     body.append(header);
     const subheading = document.querySelector('.subheading');
     subheading.style.color = '#fff'
@@ -492,10 +480,7 @@ const createHeader = () => {
 window.onload = () => {
     createHeader()
     body.append(textField)
-
-    body.append(keyboard.generateKeyBoard())
-
-
+    body.append(keyboard.createKey())
     document.addEventListener('keydown', (event) => {
         const button = document.querySelector(`[data-code=${event.code}]`);
         if (button) {
@@ -503,19 +488,16 @@ window.onload = () => {
             keyPress(event, button, event.code);
         }
     });
-
     document.addEventListener('keyup', (event) => {
         const button = document.querySelector(`[data-code=${event.code}]`);
         if (button) {
             button.classList.remove('active');
             if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
                 keyboard.removeShift(event);
-                keyboard.updateKeyboard(event);
+                keyboard.updateKeys(event);
             }
         }
     });
-
-
     document.querySelector('.keyboard').addEventListener('click', (event) => {
         if (event.target.closest('.key')) {
             const button = event.target.closest('.key');
@@ -528,8 +510,4 @@ window.onload = () => {
         }
     });
 }
-
-
-
-
 
