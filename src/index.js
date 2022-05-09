@@ -32,13 +32,14 @@ const keyBoar = {
     document.body.appendChild(this.elements.main);
 
     // Automatically use keyBoar for elements with .use-keyBoar-input
-    document.querySelectorAll('.use-keyBoar-input').forEach((el) => {
-      el.addEventListener('focus', () => {
-        this.open(el.value, (currentValue) => {
-          el.value = currentValue;
-        });
-      });
-    });
+    //   document.querySelectorAll('.use-keyBoar-input').forEach((el) => {
+    //     el.addEventListener('focus', () => {
+    //       this.open(el.value, (currentValue) => {
+    //         el.value = currentValue;
+    //       });
+    //     });
+    //   });
+    // },
   },
 
   createKeys() {
@@ -63,7 +64,6 @@ const keyBoar = {
           keyElement.innerHTML = createIconHTML('backspace');
 
           keyElement.addEventListener('click', () => {
-            this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
             this.triggerEvent('oninput');
           });
 
@@ -116,7 +116,6 @@ const keyBoar = {
           keyElement.textContent = key.toLowerCase();
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
             this.triggerEvent('oninput');
           });
 
@@ -144,7 +143,9 @@ const keyBoar = {
 
     for (const key of this.elements.keys) {
       if (key.childElementCount === 0) {
-        key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+        if (key.textContent = this.properties.capsLock) {
+          key.textContent.toUpperCase()
+        } else { } key.textContent.toLowerCase();
       }
     }
   },
@@ -221,50 +222,6 @@ const keyData = [
 // createDom
 
 function createDom(element, innerHTML, ...tyles) {
-  const keyElement = document.createElement('div')
-  switch (element) {
-    case 'backspace':
-      keyElement.classList.add('keyBoar-key--wide');
-      keyElement.innerHTML = createIconHTML('backspace');
-      keyElement.addEventListener('click', () => {
-        this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
-        this.triggerEvent('oninput');
-      });
-
-      break;
-    case 'caps':
-      keyElement.classList.add('keyBoar-key--wide', 'keyBoar-key--activatable');
-      keyElement.innerHTML = createIconHTML('keyBoar_capslock');
-
-      keyElement.addEventListener('click', () => {
-        this.toggleCapsLock();
-        keyElement.classList.toggle('keyBoar-key--active', this.properties.capsLock);
-      });
-
-      break;
-
-    case 'enter':
-      keyElement.classList.add('keyBoar-key--wide');
-      keyElement.innerHTML = createIconHTML('keyBoar_return');
-
-      keyElement.addEventListener('click', () => {
-        this.properties.value += '\n';
-        this.triggerEvent('oninput');
-      });
-
-      break;
-
-    case 'space':
-      keyElement.classList.add('keyBoar-key--extra-wide');
-      keyElement.innerHTML = createIconHTML('space_bar');
-
-      keyElement.addEventListener('click', () => {
-        this.properties.value += ' ';
-        this.triggerEvent('oninput');
-      });
-
-      break;
-  }
   const domN = document.createElement(element);
   domN.classList.add(...tyles);
   domN.innerHTML = innerHTML;
@@ -317,10 +274,6 @@ class KeyBoard {
     } else {
       localStorage.setItem('lang', this.lang);
     }
-  }
-
-  logF() {
-    console.log('BIIIIII');
   }
 
   langCh(event) {
@@ -422,31 +375,33 @@ function keyPress(event, button, code) {
     textField.setSelectionRange(cursor + 1, cursor + 1);
   }
   if (code === 'ArrowUp') {
-    const textBeforeCursor = textField.value.substring(0, cursor).split('\n');
-    if (textBeforeCursor.length === 1 || textBeforeCursor[textBeforeCursor.length - 1].length >= 57) {
+    const textBCur = textField.value.substring(0, cursor).split('\n');
+    if (textBCur.length === 1
+      || textBCur[textBCur.length - 1].length >= 57) {
       cursor -= 57;
-    } else if (textBeforeCursor[textBeforeCursor.length - 1].length <= textBeforeCursor[textBeforeCursor.length - 2].length % 57) {
-      cursor -= (textBeforeCursor[textBeforeCursor.length - 2].length % 57) + 1;
+    } else if (textBCur[textBCur.length - 1].length
+      <= textBCur[textBCur.length - 2].length % 57) {
+      cursor -= (textBCur[textBCur.length - 2].length % 57) + 1;
     } else {
-      cursor -= textBeforeCursor[textBeforeCursor.length - 1].length + 1;
+      cursor -= textBCur[textBCur.length - 1].length + 1;
     }
     if (cursor < 0) cursor = 0;
     textField.setSelectionRange(cursor, cursor);
   }
   if (code === 'ArrowDown') {
     cursor = textField.selectionEnd;
-    const textBeforeCursor = textField.value.substring(0, cursor).split('\n');
+    const textBCur = textField.value.substring(0, cursor).split('\n');
     const textAfterCursor = textField.value.substring(textField.selectionEnd).split('\n');
     if (textAfterCursor.length === 1 || textAfterCursor[0].length >= 57) {
       cursor += 57;
-    } else if ((textBeforeCursor[textBeforeCursor.length - 1].length % 57)
+    } else if ((textBCur[textBCur.length - 1].length % 57)
       > textAfterCursor[1].length) {
       cursor += textAfterCursor[0].length + textAfterCursor[1].length + 1;
-    } else if ((((textBeforeCursor[textBeforeCursor.length - 1].length)
+    } else if ((((textBCur[textBCur.length - 1].length)
       + textAfterCursor[0].length) > 57)) {
       cursor += textAfterCursor[0].length;
     } else {
-      cursor += (textBeforeCursor[textBeforeCursor.length - 1].length % 57)
+      cursor += (textBCur[textBCur.length - 1].length % 57)
         + textAfterCursor[0].length + 1;
     }
     textField.setSelectionRange(cursor, cursor);
@@ -466,16 +421,16 @@ function keyPress(event, button, code) {
     keyboard.removeShift(event);
   }
   if (text) {
-    let textBeforeCursor = textField.value.substring(0, cursor);
+    let textBCur = textField.value.substring(0, cursor);
     const textAfterCursor = textField.value.substring(textField.selectionEnd);
     if (text === '-1') {
       text = '';
       if (cursor === textField.selectionEnd) {
-        textBeforeCursor = textBeforeCursor.slice(0, -1);
+        textBCur = textBCur.slice(0, -1);
         cursor -= (cursor > 0) ? 2 : 1;
       } else cursor -= 1;
     }
-    textField.value = textBeforeCursor + text + textAfterCursor;
+    textField.value = textBCur + text + textAfterCursor;
     textField.setSelectionRange(cursor + 1, cursor + 1);
     if (text === '    ') textField.setSelectionRange(cursor + 4, cursor + 4);
   }
