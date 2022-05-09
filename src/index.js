@@ -448,10 +448,12 @@ class KeyBoard {
       document.querySelectorAll('.key').forEach((el) => {
         if (el.dataset[`${lang}Shift`]) {
           if (this.caps === 'on') {
+            // eslint-disable-next-line no-param-reassign
             el.innerHTML = el.dataset[`${lang}Shift`].toLowerCase();
             // eslint-disable-next-line no-param-reassign
           } else el.innerHTML = el.dataset[`${lang}Shift`];
         } else if (el.dataset[lang]) {
+          // eslint-disable-next-line no-param-reassign
           el.innerHTML = el.dataset[lang];
         }
       });
@@ -462,6 +464,7 @@ class KeyBoard {
             // eslint-disable-next-line no-param-reassign
             elem.innerHTML = elem.dataset[lang].toUpperCase();
           } else {
+            // eslint-disable-next-line no-param-reassign
             elem.innerHTML = elem.dataset[lang];
           }
         }
