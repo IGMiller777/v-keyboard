@@ -449,18 +449,20 @@ class KeyBoard {
         if (el.dataset[`${lang}Shift`]) {
           if (this.caps === 'on') {
             el.innerHTML = el.dataset[`${lang}Shift`].toLowerCase();
+            // eslint-disable-next-line no-param-reassign
           } else el.innerHTML = el.dataset[`${lang}Shift`];
         } else if (el.dataset[lang]) {
           el.innerHTML = el.dataset[lang];
         }
       });
     } else {
-      document.querySelectorAll('.key').forEach((el) => {
-        if (el.dataset[lang]) {
+      document.querySelectorAll('.key').forEach((elem) => {
+        if (elem.dataset[lang]) {
           if (this.caps === 'on' && !(event.shiftKey || this.shift)) {
-            el.innerHTML = el.dataset[lang].toUpperCase();
+            // eslint-disable-next-line no-param-reassign
+            elem.innerHTML = elem.dataset[lang].toUpperCase();
           } else {
-            el.innerHTML = el.dataset[lang];
+            elem.innerHTML = elem.dataset[lang];
           }
         }
       });
