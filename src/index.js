@@ -1,20 +1,5 @@
-
-import keyData from "./keys.js";
-
-
-
-
-
-
-
-
-
-// 
-
-
-
-
-const Keyboard = {
+const x = 3;
+const keyBoar = {
     elements: {
         main: null,
         keysContainer: null,
@@ -37,18 +22,18 @@ const Keyboard = {
         this.elements.keysContainer = document.createElement("div");
 
         // Setup main elements
-        this.elements.main.classList.add("keyboard", "keyboard--hidden");
-        this.elements.keysContainer.classList.add("keyboard-keys");
+        this.elements.main.classList.add("keyBoar", "keyBoar--hidden");
+        this.elements.keysContainer.classList.add("keyBoar-keys");
         this.elements.keysContainer.appendChild(this._createKeys());
 
-        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard-key");
+        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyBoar-key");
 
         // Add to DOM
         this.elements.main.appendChild(this.elements.keysContainer);
         document.body.appendChild(this.elements.main);
 
-        // Automatically use keyboard for elements with .use-keyboard-input
-        document.querySelectorAll(".use-keyboard-input").forEach(element => {
+        // Automatically use keyBoar for elements with .use-keyBoar-input
+        document.querySelectorAll(".use-keyBoar-input").forEach(element => {
             element.addEventListener("focus", () => {
                 this.open(element.value, currentValue => {
                     element.value = currentValue;
@@ -66,8 +51,6 @@ const Keyboard = {
             "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
             "space"
         ];
-
-        // Creates HTML for an icon
         const createIconHTML = (icon_name) => {
             return `<i class="material-icons">${icon_name}</i>`;
         };
@@ -75,14 +58,11 @@ const Keyboard = {
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
             const insertLineBreak = ["backspace", "p", "enter", "?"].indexOf(key) !== -1;
-
-            // Add attributes/classes
             keyElement.setAttribute("type", "button");
-            keyElement.classList.add("keyboard-key");
-
+            keyElement.classList.add("keyBoar-key");
             switch (key) {
                 case "backspace":
-                    keyElement.classList.add("keyboard-key--wide");
+                    keyElement.classList.add("keyBoar-key--wide");
                     keyElement.innerHTML = createIconHTML("backspace");
 
                     keyElement.addEventListener("click", () => {
@@ -91,21 +71,20 @@ const Keyboard = {
                     });
 
                     break;
-
                 case "caps":
-                    keyElement.classList.add("keyboard-key--wide", "keyboard-key--activatable");
-                    keyElement.innerHTML = createIconHTML("keyboard_capslock");
+                    keyElement.classList.add("keyBoar-key--wide", "keyBoar-key--activatable");
+                    keyElement.innerHTML = createIconHTML("keyBoar_capslock");
 
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
-                        keyElement.classList.toggle("keyboard-key--active", this.properties.capsLock);
+                        keyElement.classList.toggle("keyBoar-key--active", this.properties.capsLock);
                     });
 
                     break;
 
                 case "enter":
-                    keyElement.classList.add("keyboard-key--wide");
-                    keyElement.innerHTML = createIconHTML("keyboard_return");
+                    keyElement.classList.add("keyBoar-key--wide");
+                    keyElement.innerHTML = createIconHTML("keyBoar_return");
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -115,7 +94,7 @@ const Keyboard = {
                     break;
 
                 case "space":
-                    keyElement.classList.add("keyboard-key--extra-wide");
+                    keyElement.classList.add("keyBoar-key--extra-wide");
                     keyElement.innerHTML = createIconHTML("space_bar");
 
                     keyElement.addEventListener("click", () => {
@@ -126,7 +105,7 @@ const Keyboard = {
                     break;
 
                 case "done":
-                    keyElement.classList.add("keyboard-key--wide", "keyboard-key--dark");
+                    keyElement.classList.add("keyBoar-key--wide", "keyBoar-key--dark");
                     keyElement.innerHTML = createIconHTML("check_circle");
 
                     keyElement.addEventListener("click", () => {
@@ -177,67 +156,124 @@ const Keyboard = {
         this.properties.value = initialValue || "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
-        this.elements.main.classList.remove("keyboard--hidden");
+        this.elements.main.classList.remove("keyBoar--hidden");
     },
 
     close() {
         this.properties.value = "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
-        this.elements.main.classList.add("keyboard--hidden");
+        this.elements.main.classList.add("keyBoar--hidden");
     }
 };
 
-// window.addEventListener("DOMContentLoaded", function () {
-//     Keyboard.init();
-// });
+window.addEventListener("DOMContentLoaded", function () {
+    keyBoar.init();
+    const keyC = document.querySelector('.keyBoar-keys');
+    keyC.style.display = 'none'
+    console.log(keyC);
 
 
+});
+const keyData = [
+    [{ key: { ru: '~', en: '`' }, shift: { ru: '`', en: '~' }, code: 'Backquote' }, { key: { ru: '1', en: '1' }, shift: { ru: '!', en: '!' }, code: 'Digit1' },
+    { key: { ru: '2', en: '2' }, shift: { ru: '"', en: '@' }, code: 'Digit2' }, { key: { ru: '3', en: '3' }, shift: { ru: '№', en: '#' }, code: 'Digit3' },
+    { key: { ru: '4', en: '4' }, shift: { ru: ';', en: '$' }, code: 'Digit4' }, { key: { ru: '5', en: '5' }, shift: { ru: '%', en: '%' }, code: 'Digit5' },
+    { key: { ru: '6', en: '6' }, shift: { ru: ':', en: '^' }, code: 'Digit6' }, { key: { ru: '7', en: '7' }, shift: { ru: '?', en: '&' }, code: 'Digit7' },
+    { key: { ru: '8', en: '8' }, shift: { ru: '*', en: '*' }, code: 'Digit8' }, { key: { ru: '9', en: '9' }, shift: { ru: '(', en: '(' }, code: 'Digit9' },
+    { key: { ru: '0', en: '0' }, shift: { ru: ')', en: ')' }, code: 'Digit0' }, { key: { ru: '-', en: '-' }, shift: { ru: '_', en: '_' }, code: 'Minus' },
+    { key: { ru: '=', en: '=' }, shift: { ru: '+', en: '+' }, code: 'Equal' }, {
+        key: 'Backspace', code: 'Backspace', class: 'key-backspace', noType: true,
+    }],
+    [{ key: 'Tab', code: 'Tab', class: 'key-tab', noType: true, }, { key: { ru: 'й', en: 'q' }, shift: { ru: 'Й', en: 'Q' }, code: 'KeyQ' }, { key: { ru: 'ц', en: 'w' }, shift: { ru: 'Ц', en: 'W' }, code: 'KeyW' },
+    { key: { ru: 'у', en: 'e' }, shift: { ru: 'У', en: 'E' }, code: 'KeyE' }, { key: { ru: 'к', en: 'r' }, shift: { ru: 'К', en: 'R' }, code: 'KeyR' }, { key: { ru: 'е', en: 't' }, shift: { ru: 'Е', en: 'T' }, code: 'KeyT' },
+    { key: { ru: 'н', en: 'y' }, shift: { ru: 'Н', en: 'Y' }, code: 'KeyY' }, { key: { ru: 'г', en: 'u' }, shift: { ru: 'Г', en: 'U' }, code: 'KeyU' }, { key: { ru: 'ш', en: 'i' }, shift: { ru: 'Ш', en: 'I' }, code: 'KeyI' },
+    { key: { ru: 'щ', en: 'o' }, shift: { ru: 'Щ', en: 'O' }, code: 'KeyO' }, { key: { ru: 'з', en: 'p' }, shift: { ru: 'З', en: 'P' }, code: 'KeyP' }, { key: { ru: 'х', en: '[' }, shift: { ru: 'Х', en: '{' }, code: 'BracketLeft' },
+    { key: { ru: 'ъ', en: ']' }, shift: { ru: 'Ъ', en: '}' }, code: 'BracketRight' }, { key: { ru: '\\', en: '\\' }, shift: { ru: '|', en: '|' }, code: 'Backslash', class: 'key-backslash', },],
+    [{ key: '<span class="caps_icon">•</span><div>Caps<br>Lock</div>', code: 'CapsLock', class: 'key-capslock', noType: true, },
+    { key: { ru: 'ф', en: 'a' }, shift: { ru: 'Ф', en: 'A' }, code: 'KeyA' }, { key: { ru: 'ы', en: 's' }, shift: { ru: 'Ы', en: 'S' }, code: 'KeyS' }, { key: { ru: 'в', en: 'd' }, shift: { ru: 'В', en: 'D' }, code: 'KeyD' },
+    { key: { ru: 'а', en: 'f' }, shift: { ru: 'А', en: 'F' }, code: 'KeyF' }, { key: { ru: 'п', en: 'g' }, shift: { ru: 'П', en: 'G' }, code: 'KeyG' }, { key: { ru: 'р', en: 'h' }, shift: { ru: 'Р', en: 'H' }, code: 'KeyH' }, { key: { ru: 'о', en: 'j' }, shift: { ru: 'О', en: 'J' }, code: 'KeyJ' },
+    { key: { ru: 'л', en: 'k' }, shift: { ru: 'Л', en: 'K' }, code: 'KeyK' }, { key: { ru: 'д', en: 'l' }, shift: { ru: 'Д', en: 'L' }, code: 'KeyL' }, { key: { ru: 'ж', en: ';' }, shift: { ru: 'Ж', en: ':' }, code: 'Semicolon' }, { key: { ru: 'э', en: '\'' }, shift: { ru: 'Э', en: '"' }, code: 'Quote' },
+    { key: 'Enter', code: 'Enter', class: 'key-enter', noType: true, },],
+    [{ key: 'Shift', code: 'ShiftLeft', class: 'key-leftshift', noType: true, }, { key: { ru: 'я', en: 'z' }, shift: { ru: 'Я', en: 'Z' }, code: 'KeyZ' }, { key: { ru: 'ч', en: 'x' }, shift: { ru: 'Ч', en: 'X' }, code: 'KeyX' }, { key: { ru: 'с', en: 'c' }, shift: { ru: 'С', en: 'C' }, code: 'KeyC' }, { key: { ru: 'м', en: 'v' }, shift: { ru: 'М', en: 'V' }, code: 'KeyV' },
+    { key: { ru: 'и', en: 'b' }, shift: { ru: 'И', en: 'B' }, code: 'KeyB' }, { key: { ru: 'т', en: 'n' }, shift: { ru: 'Т', en: 'N' }, code: 'KeyN' }, { key: { ru: 'ь', en: 'm' }, shift: { ru: 'Ь', en: 'M' }, code: 'KeyM' }, { key: { ru: 'б', en: ',' }, shift: { ru: 'Б', en: '<' }, code: 'Comma' },
+    { key: { ru: 'ю', en: '.' }, shift: { ru: 'Ю', en: '>' }, code: 'Period' }, { key: { ru: '.', en: '/' }, shift: { ru: ',', en: '?' }, code: 'Slash' }, { key: '▲', code: 'ArrowUp', noType: true }, { key: 'Shift', code: 'ShiftRight', class: 'key-rightshift', noType: true, },],
+    [{ key: 'Ctrl', code: 'ControlLeft', class: 'key-leftctrl', noType: true }, { key: { ru: 'RU', en: 'EN' }, code: 'Lang', class: 'key-lang', noType: true }, { key: 'Alt', code: 'AltLeft', class: 'key-leftalt', noType: true }, { key: ' ', code: 'Space', class: 'key-space' }, { key: 'Alt', code: 'AltRight', class: 'key-rightalt', noType: true }, { key: 'Ctrl', code: 'ControlRight', class: 'key-rightctrl', noType: true }, { key: '◄', code: 'ArrowLeft', noType: true }, { key: '▼', code: 'ArrowDown', noType: true }, { key: '►', code: 'ArrowRight', noType: true }],
+];
+
+// createDom
 
 
+function createDom(element, innerHTML, ...tyles) {
+    switch (element) {
+        case "backspace":
+            keyElement.classList.add("keyBoar-key--wide");
+            keyElement.innerHTML = createIconHTML("backspace");
+            keyElement.addEventListener("click", () => {
+                this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                this._triggerEvent("oninput");
+            });
 
-// аааа
+            break;
+        case "caps":
+            keyElement.classList.add("keyBoar-key--wide", "keyBoar-key--activatable");
+            keyElement.innerHTML = createIconHTML("keyBoar_capslock");
 
+            keyElement.addEventListener("click", () => {
+                this._toggleCapsLock();
+                keyElement.classList.toggle("keyBoar-key--active", this.properties.capsLock);
+            });
 
-const createDomNode = (element, innerHTML, ...classes) => {
-    const node = document.createElement(element)
-    node.classList.add(...classes)
-    node.innerHTML = innerHTML;
-    return node
-}
+            break;
 
+        case "enter":
+            keyElement.classList.add("keyBoar-key--wide");
+            keyElement.innerHTML = createIconHTML("keyBoar_return");
 
-const testCapsLock = (event) => {
-    if (event.getModifierState('CapsLock')) {
-        document.querySelector('.caps_icon').classList.add('caps_on')
+            keyElement.addEventListener("click", () => {
+                this.properties.value += "\n";
+                this._triggerEvent("oninput");
+            });
+
+            break;
+
+        case "space":
+            keyElement.classList.add("keyBoar-key--extra-wide");
+            keyElement.innerHTML = createIconHTML("space_bar");
+
+            keyElement.addEventListener("click", () => {
+                this.properties.value += " ";
+                this._triggerEvent("oninput");
+            });
+
+            break;
     }
-    else {
-        document.querySelector('.caps_icon').classList.remove('caps_on')
-    }
+    const domN = document.createElement(element)
+    domN.classList.add(...tyles)
+    domN.innerHTML = innerHTML;
+    return domN
 }
-
 
 
 class KeyBoard {
     constructor() {
+        this.alt = false
+        this.ctrl = false
+        this.home = true
         this.lang = 'en';
         this.caps = 'off';
         this.shift = false;
 
-        this.alt = false
     }
-
-    //CREATE KEYS
-
-    generateKeyBoard() {
-        const keyboard = createDomNode('div', '', 'keyboard');
-        const container = createDomNode('div', '', 'keyboard-container');
-        this.languageCheck();
+    createKey() {
+        const keyboard = createDom('div', '', 'keyboard');
+        const container = createDom('div', '', 'keyboard-container');
+        this.langS();
         for (let i = 0; i < keyData.length; i += 1) {
-            const row = createDomNode('div', '', 'keyboard-row');
+            const row = createDom('div', '', 'keyboard-row');
             keyData[i].forEach((e) => {
                 const keyLabel = (e.key.ru && e.key.en) ? e.key[this.lang] : e.key;
-                const key = createDomNode('div', keyLabel, 'key');
+                const key = createDom('div', keyLabel, 'key');
                 if (e.class) key.classList.add(e.class);
                 key.dataset.code = e.code;
                 if (e.key.ru && e.key.en) {
@@ -258,20 +294,17 @@ class KeyBoard {
         keyboard.append(container);
         return keyboard;
     }
-
-    // CHECKING LANG \
-
-    languageCheck() {
+    langS() {
         if (localStorage.getItem('lang')) {
             this.lang = localStorage.getItem('lang')
         } else {
             localStorage.setItem('lang', this.lang)
         }
     }
-
-    // WITH SHIFT
-
-    languageChange(event) {
+    logF() {
+        console.log('BIIIIII');
+    }
+    langCh(event) {
         if (this.lang === 'en') {
             this.lang = 'ru'
         }
@@ -279,11 +312,10 @@ class KeyBoard {
             this.lang = 'en'
         }
         localStorage.setItem('lang', this.lang)
-        this.updateKeyboard(event)
+        this.updateKeys(event)
     }
 
-    // CAPS 
-    capsLockIcon() {
+    capsIc() {
         if (this.caps === 'on') {
             document.querySelector('.caps_icon').classList.add('caps_on');
         } else {
@@ -291,19 +323,24 @@ class KeyBoard {
         }
     }
 
-    changeCapsLock(event) {
+    changeCaps(event) {
         if (this.caps === 'on') {
             this.caps = 'off'
         } else {
             this.caps = 'on'
         }
-        this.capsLockIcon()
-        this.updateKeyboard(event)
+        this.capsIc()
+        this.updateKeys(event)
     }
-
-    // UPDATING 
-
-    updateKeyboard(event) {
+    removeShift(event) {
+        if (this.shift) {
+            this.shift = !this.shift;
+            document.querySelector('.key_leftshift').classList.remove('active');
+            document.querySelector('.key_rightshift').classList.remove('active');
+            this.updateKeys(event);
+        }
+    }
+    updateKeys(event) {
         const { lang } = this
         if (event.shiftKey || this.shift) {
             document.querySelectorAll('.key').forEach((el) => {
@@ -331,48 +368,34 @@ class KeyBoard {
         }
     }
 
-    removeShift(event) {
-        if (this.shift) {
-            this.shift = !this.shift;
-            document.querySelector('.key_leftshift').classList.remove('active');
-            document.querySelector('.key_rightshift').classList.remove('active');
-            this.updateKeyboard(event);
-        }
-    }
-
-
-    logF() {
-        console.log('BIIIIII');
-    }
-
 
 }
 
 const title = 'Keyboard'
 const { body } = document
-const textField = createDomNode('textarea', '', 'textfield')
+const textField = createDom('textarea', '', 'textfield')
 const keyboard = new KeyBoard()
 
-const keyPress = (event, button, code) => {
+function keyPress(event, button, code) {
     let text = ''
     let cursor = textField.selectionStart;
     event.preventDefault()
     textField.focus()
 
     if (code === 'CapsLock') {
-        keyboard.changeCapsLock(event)
+        keyboard.changeCaps(event)
     }
     if ((code === 'AltLeft' && (event.shiftKey || keyboard.shift))
         || (code === 'AltRight' && (event.shiftKey || keyboard.shift))
         || (code === 'ShiftLeft' && event.altKey)
         || (code === 'ShiftRight' && event.altKey)
         || (code === 'Lang')) {
-        keyboard.languageChange(event)
+        keyboard.langCh(event)
         keyboard.removeShift(event)
     }
 
     if (code === 'ShiftLeft' || code === 'ShiftRight') {
-        keyboard.updateKeyboard(event);
+        keyboard.updateKeys(event);
     }
 
     // ARROWWWSS
@@ -427,8 +450,6 @@ const keyPress = (event, button, code) => {
         text = button.textContent;
         keyboard.removeShift(event);
     }
-
-
     if (text) {
         let textBeforeCursor = textField.value.substring(0, cursor);
         const textAfterCursor = textField.value.substring(textField.selectionEnd);
@@ -445,22 +466,21 @@ const keyPress = (event, button, code) => {
     }
 }
 
-//  CREATING
-const createHeader = () => {
-    const header = createDomNode('div', '', 'header')
-    header.append(createDomNode('h1', title, 'header__text'));
-    header.append(createDomNode('div', '', 'subheading'));
+function createHeader() {
+    const header = createDom('div', '', 'header')
+    header.append(createDom('h1', title, 'header__text'));
+    header.append(createDom('div', '', 'subheading'));
     body.append(header);
     const subheading = document.querySelector('.subheading');
+    subheading.style.color = '#fff'
+
+    subheading.textContent = 'For switching lang use Shift-Alt or Button below'
 }
 
 window.onload = () => {
     createHeader()
     body.append(textField)
-
-    body.append(keyboard.generateKeyBoard())
-
-
+    body.append(keyboard.createKey())
     document.addEventListener('keydown', (event) => {
         const button = document.querySelector(`[data-code=${event.code}]`);
         if (button) {
@@ -468,19 +488,16 @@ window.onload = () => {
             keyPress(event, button, event.code);
         }
     });
-
     document.addEventListener('keyup', (event) => {
         const button = document.querySelector(`[data-code=${event.code}]`);
         if (button) {
             button.classList.remove('active');
             if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
                 keyboard.removeShift(event);
-                keyboard.updateKeyboard(event);
+                keyboard.updateKeys(event);
             }
         }
     });
-
-
     document.querySelector('.keyboard').addEventListener('click', (event) => {
         if (event.target.closest('.key')) {
             const button = event.target.closest('.key');
@@ -493,8 +510,4 @@ window.onload = () => {
         }
     });
 }
-
-
-
-
 
