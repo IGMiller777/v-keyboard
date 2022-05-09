@@ -2,19 +2,7 @@
 import keyData from "./keys.js";
 
 
-
-
-
-
-
-
-
-// 
-
-
-
-
-const Keyboard = {
+const keyBoar = {
     elements: {
         main: null,
         keysContainer: null,
@@ -37,18 +25,18 @@ const Keyboard = {
         this.elements.keysContainer = document.createElement("div");
 
         // Setup main elements
-        this.elements.main.classList.add("keyboard", "keyboard--hidden");
-        this.elements.keysContainer.classList.add("keyboard-keys");
+        this.elements.main.classList.add("keyBoar", "keyBoar--hidden");
+        this.elements.keysContainer.classList.add("keyBoar-keys");
         this.elements.keysContainer.appendChild(this._createKeys());
 
-        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard-key");
+        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyBoar-key");
 
         // Add to DOM
         this.elements.main.appendChild(this.elements.keysContainer);
         document.body.appendChild(this.elements.main);
 
-        // Automatically use keyboard for elements with .use-keyboard-input
-        document.querySelectorAll(".use-keyboard-input").forEach(element => {
+        // Automatically use keyBoar for elements with .use-keyBoar-input
+        document.querySelectorAll(".use-keyBoar-input").forEach(element => {
             element.addEventListener("focus", () => {
                 this.open(element.value, currentValue => {
                     element.value = currentValue;
@@ -78,11 +66,11 @@ const Keyboard = {
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
-            keyElement.classList.add("keyboard-key");
+            keyElement.classList.add("keyBoar-key");
 
             switch (key) {
                 case "backspace":
-                    keyElement.classList.add("keyboard-key--wide");
+                    keyElement.classList.add("keyBoar-key--wide");
                     keyElement.innerHTML = createIconHTML("backspace");
 
                     keyElement.addEventListener("click", () => {
@@ -93,19 +81,19 @@ const Keyboard = {
                     break;
 
                 case "caps":
-                    keyElement.classList.add("keyboard-key--wide", "keyboard-key--activatable");
-                    keyElement.innerHTML = createIconHTML("keyboard_capslock");
+                    keyElement.classList.add("keyBoar-key--wide", "keyBoar-key--activatable");
+                    keyElement.innerHTML = createIconHTML("keyBoar_capslock");
 
                     keyElement.addEventListener("click", () => {
                         this._toggleCapsLock();
-                        keyElement.classList.toggle("keyboard-key--active", this.properties.capsLock);
+                        keyElement.classList.toggle("keyBoar-key--active", this.properties.capsLock);
                     });
 
                     break;
 
                 case "enter":
-                    keyElement.classList.add("keyboard-key--wide");
-                    keyElement.innerHTML = createIconHTML("keyboard_return");
+                    keyElement.classList.add("keyBoar-key--wide");
+                    keyElement.innerHTML = createIconHTML("keyBoar_return");
 
                     keyElement.addEventListener("click", () => {
                         this.properties.value += "\n";
@@ -115,7 +103,7 @@ const Keyboard = {
                     break;
 
                 case "space":
-                    keyElement.classList.add("keyboard-key--extra-wide");
+                    keyElement.classList.add("keyBoar-key--extra-wide");
                     keyElement.innerHTML = createIconHTML("space_bar");
 
                     keyElement.addEventListener("click", () => {
@@ -126,7 +114,7 @@ const Keyboard = {
                     break;
 
                 case "done":
-                    keyElement.classList.add("keyboard-key--wide", "keyboard-key--dark");
+                    keyElement.classList.add("keyBoar-key--wide", "keyBoar-key--dark");
                     keyElement.innerHTML = createIconHTML("check_circle");
 
                     keyElement.addEventListener("click", () => {
@@ -177,20 +165,29 @@ const Keyboard = {
         this.properties.value = initialValue || "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
-        this.elements.main.classList.remove("keyboard--hidden");
+        this.elements.main.classList.remove("keyBoar--hidden");
     },
 
     close() {
         this.properties.value = "";
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
-        this.elements.main.classList.add("keyboard--hidden");
+        this.elements.main.classList.add("keyBoar--hidden");
     }
 };
 
-// window.addEventListener("DOMContentLoaded", function () {
-//     Keyboard.init();
-// });
+window.addEventListener("DOMContentLoaded", function () {
+    keyBoar.init();
+    const keyC = document.querySelector('.keyBoar-keys');
+    keyC.style.display = 'none'
+    console.log(keyC);
+
+
+});
+
+
+
+
 
 
 
@@ -207,14 +204,14 @@ const createDomNode = (element, innerHTML, ...classes) => {
 }
 
 
-const testCapsLock = (event) => {
-    if (event.getModifierState('CapsLock')) {
-        document.querySelector('.caps_icon').classList.add('caps_on')
-    }
-    else {
-        document.querySelector('.caps_icon').classList.remove('caps_on')
-    }
-}
+// const testCapsLock = (event) => {
+//     if (event.getModifierState('CapsLock')) {
+//         document.querySelector('.caps_icon').classList.add('caps_on')
+//     }
+//     else {
+//         document.querySelector('.caps_icon').classList.remove('caps_on')
+//     }
+// }
 
 
 
@@ -452,6 +449,7 @@ const createHeader = () => {
     header.append(createDomNode('div', '', 'subheading'));
     body.append(header);
     const subheading = document.querySelector('.subheading');
+    subheading.textContent = 'For switching lang use Shift-Alt or Button below'
 }
 
 window.onload = () => {
