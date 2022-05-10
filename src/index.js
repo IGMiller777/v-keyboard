@@ -188,7 +188,7 @@ const keyData = [[{ key: { ru: '~', en: '`' }, shift: { ru: '`', en: '~' }, code
   key: { ru: '\\', en: '\\' }, shift: { ru: '|', en: '|' }, code: 'Backslash', class: 'key-backslash',
 }],
 [{
-  key: '<span class="caps_icon">•</span><div>Caps<br>Lock</div>', code: 'CapsLock', class: 'key-capslock', noType: true,
+  key: '<span class="caps_icon">•</span><div>Caps<br>lock</div>', code: 'CapsLock', class: 'key-capslock', noType: true,
 },
 { key: { ru: 'ф', en: 'a' }, shift: { ru: 'Ф', en: 'A' }, code: 'KeyA' }, { key: { ru: 'ы', en: 's' }, shift: { ru: 'Ы', en: 'S' }, code: 'KeyS' }, { key: { ru: 'в', en: 'd' }, shift: { ru: 'В', en: 'D' }, code: 'KeyD' },
 { key: { ru: 'а', en: 'f' }, shift: { ru: 'А', en: 'F' }, code: 'KeyF' }, { key: { ru: 'п', en: 'g' }, shift: { ru: 'П', en: 'G' }, code: 'KeyG' }, { key: { ru: 'р', en: 'h' }, shift: { ru: 'Р', en: 'H' }, code: 'KeyH' }, { key: { ru: 'о', en: 'j' }, shift: { ru: 'О', en: 'J' }, code: 'KeyJ' },
@@ -454,7 +454,7 @@ window.onload = () => {
 
   subheading.style['margin-top'] = '-20px';
 
-  subheading.textContent = 'For switching lang use Shift-Alt or Button below';
+  subheading.textContent = 'For switching lang use Shift-Alt or Button above';
   document.addEventListener('keydown', (event) => {
     const button = document.querySelector(`[data-code=${event.code}]`);
     if (button) {
