@@ -200,7 +200,7 @@ const keyData = [[{ key: { ru: '~', en: '`' }, shift: { ru: '`', en: '~' }, code
   key: 'Shift', code: 'ShiftLeft', class: 'key-leftshift', noType: true,
 }, { key: { ru: 'я', en: 'z' }, shift: { ru: 'Я', en: 'Z' }, code: 'KeyZ' }, { key: { ru: 'ч', en: 'x' }, shift: { ru: 'Ч', en: 'X' }, code: 'KeyX' }, { key: { ru: 'с', en: 'c' }, shift: { ru: 'С', en: 'C' }, code: 'KeyC' }, { key: { ru: 'м', en: 'v' }, shift: { ru: 'М', en: 'V' }, code: 'KeyV' },
 { key: { ru: 'и', en: 'b' }, shift: { ru: 'И', en: 'B' }, code: 'KeyB' }, { key: { ru: 'т', en: 'n' }, shift: { ru: 'Т', en: 'N' }, code: 'KeyN' }, { key: { ru: 'ь', en: 'm' }, shift: { ru: 'Ь', en: 'M' }, code: 'KeyM' }, { key: { ru: 'б', en: ',' }, shift: { ru: 'Б', en: '<' }, code: 'Comma' },
-{ key: { ru: 'ю', en: '.' }, shift: { ru: 'Ю', en: '>' }, code: 'Period' }, { key: { ru: '.', en: '/' }, shift: { ru: ',', en: '?' }, code: 'Slash' }, { key: '▲', code: 'ArrowUp', noType: true }, {
+{ key: { ru: 'ю', en: '.' }, shift: { ru: 'Ю', en: '>' }, code: 'Period' }, { key: { ru: '.', en: '/' }, shift: { ru: ',', en: '?' }, code: 'Slash' }, { key: '↑', code: 'ArrowUp', noType: true }, {
   key: 'Shift', code: 'ShiftRight', class: 'key-rightshift', noType: true,
 }],
 [{
@@ -213,7 +213,7 @@ const keyData = [[{ key: { ru: '~', en: '`' }, shift: { ru: '`', en: '~' }, code
   key: 'Alt', code: 'AltRight', class: 'key-rightalt', noType: true,
 }, {
   key: 'Ctrl', code: 'ControlRight', class: 'key-rightctrl', noType: true,
-}, { key: '◄', code: 'ArrowLeft', noType: true }, { key: '▼', code: 'ArrowDown', noType: true }, { key: '►', code: 'ArrowRight', noType: true }],
+}, { key: '←', code: 'ArrowLeft', noType: true }, { key: '↓', code: 'ArrowDown', noType: true }, { key: '→', code: 'ArrowRight', noType: true }],
 ];
 
 // createDom
