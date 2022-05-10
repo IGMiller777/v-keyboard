@@ -54,7 +54,7 @@
    margin: 12px auto 0;
    padding: 24px;
    background: var(--back-col);
-   border-radius: 20px;
+   /* border-radius: 20px; */
    font-size: 30px;
    line-height: 130%;
    color: #000000;
@@ -62,14 +62,6 @@
  }
  .textfield:focus {
    outline: none;
- }
- 
- .footer {
-   margin: 24px auto 0;
-   font-size: 14px;
-   line-height: 130%;
-   text-align: center;
-   color: #555;
  }
  
  .keyboard {

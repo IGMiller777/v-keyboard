@@ -1,20 +1,4 @@
 const keyBoar = {
-  elements: {
-    main: null,
-    keysContainer: null,
-    keys: [],
-  },
-
-  eventHandlers: {
-    oninput: null,
-    onclose: null,
-  },
-
-  properties: {
-    value: '',
-    capsLock: false,
-  },
-
   init() {
     // Create main elements
     this.elements.main = document.createElement('div');
@@ -41,6 +25,21 @@ const keyBoar = {
     //   });
     // },
   },
+  elements: {
+    main: null,
+    keysContainer: null,
+    keys: [],
+  },
+
+  eventHandlers: {
+    oninput: null,
+    onclose: null,
+  },
+
+  properties: {
+    value: '',
+    capsLock: false,
+  },
 
   createKeys() {
     const fragment = document.createDocumentFragment();
@@ -58,6 +57,13 @@ const keyBoar = {
       const insertLineBreak = ['backspace', 'p', 'enter', '?'].indexOf(key) !== -1;
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('keyBoar-key');
+
+      // Automatically use keyBoar for elements with .use-keyBoar-input
+      // this.elements.main.classList.add('keyBoar', 'keyBoar--hidden');
+      // this.elements.keysContainer.classList.add('keyBoar-keys');
+      // this.elements.keysContainer.appendChild(this.createKeys());
+
+      // this.elements.keys = this.elements.keysContainer.querySelectorAll('.keyBoar-key');
       switch (key) {
         case 'backspace':
           keyElement.classList.add('keyBoar-key--wide');
@@ -137,144 +143,6 @@ const keyBoar = {
       this.eventHandlers[handlerName](this.properties.value);
     }
   },
-  // const Keyboard = {
-  //     elements: {
-  //         main: null,
-  //         keysContainer: null,
-  //         keys: []
-  //     },
-
-  //     eventHandlers: {
-  //         oninput: null,
-  //         onclose: null
-  //     },
-
-  //     properties: {
-  //         value: "",
-  //         capsLock: false
-  //     },
-
-  //     init() {
-  //         // Create main elements
-  //         this.elements.main = document.createElement("div");
-  //         this.elements.keysContainer = document.createElement("div");
-
-  //         // Setup main elements
-  //         this.elements.main.classList.add("keyboard", "keyboard--hidden");
-  //         this.elements.keysContainer.classList.add("keyboard__keys");
-  //         this.elements.keysContainer.appendChild(this._createKeys());
-
-  //         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
-
-  //         // Add to DOM
-  //         this.elements.main.appendChild(this.elements.keysContainer);
-  //         document.body.appendChild(this.elements.main);
-
-  //         // Automatically use keyboard for elements with .use-keyboard-input
-  //         document.querySelectorAll(".use-keyboard-input").forEach(element => {
-  //             element.addEventListener("focus", () => {
-  //                 this.open(element.value, currentValue => {
-  //                     element.value = currentValue;
-  //                 });
-  //             });
-  //         });
-  //     },
-
-  //     _createKeys() {
-  //         const fragment = document.createDocumentFragment();
-  //         const keyLayout = [
-  //             "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
-  //             "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-  //             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
-  //             "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
-  //             "space"
-  //         ];
-
-  //         // Creates HTML for an icon
-  //         const createIconHTML = (icon_name) => {
-  //             return `<i class="material-icons">${icon_name}</i>`;
-  //         };
-
-  //         keyLayout.forEach(key => {
-  //             const keyElement = document.createElement("button");
-  //             const insertLineBreak = ["backspace", "p", "enter", "?"].indexOf(key) !== -1;
-
-  //             // Add attributes/classes
-  //             keyElement.setAttribute("type", "button");
-  //             keyElement.classList.add("keyboard__key");
-
-  //             switch (key) {
-  //                 case "backspace":
-  //                     keyElement.classList.add("keyboard__key--wide");
-  //                     keyElement.innerHTML = createIconHTML("backspace");
-
-  //                     keyElement.addEventListener("click", () => {
-  //                         this._triggerEvent("oninput");
-  //                     });
-
-  //                     break;
-
-  //                 case "caps":
-  //                     keyElement.innerHTML = createIconHTML("keyboard_capslock");
-
-  //                     keyElement.addEventListener("click", () => {
-  //                         this._toggleCapsLock();
-  //                     });
-
-  //                     break;
-
-  //                 case "enter":
-  //                     keyElement.classList.add("keyboard__key--wide");
-  //                     keyElement.innerHTML = createIconHTML("keyboard_return");
-
-  //                     keyElement.addEventListener("click", () => {
-  //                         this.properties.value += "\n";
-  //                         this._triggerEvent("oninput");
-  //                     });
-
-  //                     break;
-
-  //                 case "space":
-  //                     keyElement.classList.add("keyboard__key--extra-wide");
-  //                     keyElement.innerHTML = createIconHTML("space_bar");
-
-  //                     keyElement.addEventListener("click", () => {
-  //                         this.properties.value += " ";
-  //                         this._triggerEvent("oninput");
-  //                     });
-
-  //                     break;
-
-  //                 case "done":
-  //                     keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
-  //                     keyElement.innerHTML = createIconHTML("check_circle");
-
-  //                     keyElement.addEventListener("click", () => {
-  //                         this.close();
-  //                         this._triggerEvent("onclose");
-  //                     });
-
-  //                     break;
-
-  //                 default:
-  //                     keyElement.textContent = key.toLowerCase();
-
-  //                     keyElement.addEventListener("click", () => {
-  //                         this._triggerEvent("oninput");
-  //                     });
-
-  //                     break;
-  //             }
-
-  //             fragment.appendChild(keyElement);
-
-  //             if (insertLineBreak) {
-  //                 fragment.appendChild(document.createElement("br"));
-  //             }
-  //         });
-
-  //         return fragment;
-  //     },
   toggleCapsLock() {
     this.properties.capsLock = !this.properties.capsLock;
 
@@ -573,18 +441,20 @@ function keyPress(event, button, code) {
 function createHeader() {
   const header = createDom('div', '', 'header');
   header.append(createDom('h1', title, 'header__text'));
-  header.append(createDom('div', '', 'subheading'));
   body.append(header);
-  const subheading = document.querySelector('.subheading');
-  subheading.style.color = '#fff';
-
-  subheading.textContent = 'For switching lang use Shift-Alt or Button below';
 }
 
 window.onload = () => {
   createHeader();
   body.append(textField);
   body.append(keyboard.createKey());
+  body.append(createDom('div', '', 'subheading'));
+  const subheading = document.querySelector('.subheading');
+  subheading.style.color = '#fff';
+
+  subheading.style['margin-top'] = '-20px';
+
+  subheading.textContent = 'For switching lang use Shift-Alt or Button below';
   document.addEventListener('keydown', (event) => {
     const button = document.querySelector(`[data-code=${event.code}]`);
     if (button) {
