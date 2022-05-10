@@ -288,6 +288,43 @@
      align-items: center;
  }
  
+ .slash{ 
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 50px;
+  width: 8px;
+  height: 50px;
+  margin-top: 0;
+  padding-right: 12px;
+  padding-left: 9px;
+  color: white;
+}
+.rulan{ 
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 50px;
+  font-family: 'Inter', sans-serif;
+  padding-left: 5px;
+
+}
+
+.theme-for{ 
+  width: 45px;
+  height: 45px;
+  margin-top: 3px;
+  margin-left: 30px;
+  background: url(./assets/image/moon.svg) no-repeat 50% 50%;
+  background-size: cover;
+}
+.theme-for.active{ 
+  background: url(./assets/image/sun.svg) no-repeat 50% 50%;
+}
+.theme-for:hover { 
+  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
+  contrast(87%);
+  cursor: pointer;
+}
  .colors_input {
      width: 100px;
      height: 50px;
@@ -332,3 +369,39 @@
    width: 135px;
  }
  
+ 
+.skill_title{ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding-top: 80px;
+}
+.skill_title-line{ 
+  width: 300px;
+  height: 2px;
+  background-color: #BDAE82;
+  border: none;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.skill_t{ 
+  color: #BDAE82;
+  font-size: 40px;
+  font-family: 'Merriweather', serif;
+  font-weight: bold;
+}
+.skills-cards { 
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.skills-card1{ 
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
