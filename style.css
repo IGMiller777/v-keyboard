@@ -1,0 +1,407 @@
+:root{ 
+ --back-col:#fafafa;
+ --back-w-col: #fff;
+ --back-keys: rgb(200, 196, 196);
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("./assets/fonst/Roboto-Regular.ttf") format('truetype');
+}
+
+*{ 
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 100%;
+   font: inherit;
+   vertical-align: baseline;
+ }
+
+ html{ 
+   background: url(./assets/keyboard.jpg) 50% 50%;
+ }
+ body {
+   font-family:'Roboto';
+   font-weight: 400;
+   font-size: 24px;
+   line-height: 28px;
+   font-style: normal;
+   max-width: 1100px;
+   margin: 0 auto;
+ }
+ 
+ .header {
+   width: 1000px;
+   margin: 24px auto 0;
+ }
+ 
+ .header__text {
+   margin-top: 24px;
+   font-weight: 700;
+   font-size: 40px;
+   line-height: 46px;
+   align-items: center;
+   text-align: center;
+   letter-spacing: 3px;
+   color: var(--back-col)
+ }
+ 
+ .textfield {
+   display: block;
+   width: 952px;
+   height: 240px;
+   margin: 12px auto 0;
+   padding: 24px;
+   background: var(--back-col);
+   /* border-radius: 20px; */
+   font-size: 30px;
+   line-height: 130%;
+   color: #000000;
+   resize: none;
+ }
+ .textfield:focus {
+   outline: none;
+ }
+ 
+ .keyboard {
+   width: 1100px;
+   height: 340px;
+   margin: 24px auto 40px;
+   background: linear-gradient(98.12deg, #fcfcfc -0.27%, #c5c5c5 105.9%);
+   box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.3);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 20px;
+ }
+ 
+ .keyboard-container {
+   display: flex;
+   flex-direction: column;
+   width: 1050px;
+   height: 310px;
+   gap: 10px;
+ }
+ 
+ .keyboard-row {
+   display: flex;
+   flex-direction: row;
+   padding: 0px;
+   gap: 10px;
+ }
+ 
+ .key {
+   display: flex;
+   background-color:var(--back-keys);
+   border: 2px solid #e8e9e9;
+   width: 65px;
+   height: 54px;
+   box-sizing: border-box;
+   box-shadow: 2px 4px 4px rgba(213, 211, 211, 0.932);
+   justify-content: center;
+   align-items: center;
+   transition: all 0.1s;
+ 
+ }
+ .key:hover {
+   border: 2px solid var(--back-w-col);
+   cursor: pointer;
+ }
+ .key:active, .key.active {
+   background-color: rgb(218, 215, 215);
+   border: 2px solid #ffffff;
+   box-sizing: border-box;
+   box-shadow: -1px -2px 4px rgba(0, 0, 0, 0.25);
+ }
+
+
+
+ @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+
+
+
+ 
+ 
+ .keyboard_wrapp {
+     max-width: 1008px;
+     width: 100%;
+     background-color: #e7e7e7;
+     overflow: hidden;
+     position: relative;
+     overflow: hidden;
+     order: 2;
+ }
+ 
+ .row {
+     display: flex;
+ }
+ 
+ .backspace_key {
+     width: 120px;
+ }
+ 
+ .tab_key {
+     width: 90px;
+ }
+ 
+ .slash_key {
+     width: 90px;
+ }
+ 
+ .caps_lock_key {
+     width: 128px;
+ }
+ 
+ .enter_key {
+     width: 120px;
+ }
+ 
+ .shift_key {
+     width: 124px;
+ }
+ 
+ .space_key {
+     max-width: 600px;
+     width: 100%;
+ }
+ 
+ .text {
+     max-width: 1008px;
+     width: 100%;
+     height: 90px;
+     margin-bottom: 30px;
+     border: none;
+     outline: none;
+     font-size: 26px;
+     background-color: #f7f7f7;
+     padding-left: 10px;
+     transition: .2s;
+ }
+ 
+
+ 
+ 
+ @keyframes keys_animation {
+     0% {
+         background-color: #333;
+         color: #fff;
+     }
+     100% {
+         background-color: #fff;
+         color: #000;
+     }
+ }
+ 
+
+ 
+ .night_mode {
+     width: 80px;
+     height: 30px;
+     background-color: #e6e6e6;
+     position: absolute;
+     right: 25px;
+     top: 25px;
+     border-radius: 50px;
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+     transition: .2s;
+ }
+ 
+ .night_mode.active {
+     background-color: #222222;
+ }
+ 
+ .toggle_circle {
+     width: 20px;
+     height: 20px;
+     background-color: rgb(54,54,54);
+     border-radius: 50px;
+     margin: 0 5px;
+     position: absolute;
+     left: 0;
+     transition: .2s;
+ }
+ 
+ .toggle_circle.active {
+     left: 60%;
+     background-color: #fff;
+ }
+
+ .key.key-rightshift {
+  width: 117px;
+}
+
+.key.key-space {
+  width: 346px;
+}
+ 
+ .keyboard_wrapp.active {
+     background-color: #585858;
+ }
+ 
+ .keys.keys_night {
+     background-color: #3c3c3c;
+     color: #fff;
+ }
+ 
+ .text.active {
+     background-color: #2b2b2b;
+     color: #fff;
+ }
+ .key.key-tab, .key.key-leftalt, .key.key-rightalt, .key.key-leftctrl, .key.key-rightctrl {
+  width: 81px;
+}
+ 
+ .keys.keys_night.active {
+     background-color: #fff;
+     color: #333;
+ }
+ .key.key-enter {
+  width: 145px;
+}
+ 
+ .keys.keys_night.remove {
+     animation: keys_night_animation 0.5s forwards;
+ }
+ 
+ @keyframes keys_night_animation {
+     0%{
+         background-color: #fff;
+         color: #000;
+     }
+     100% {
+         background-color: #333;
+         color: #fff;
+     }
+ }
+ 
+ .change_light_color {
+     width: 100px;
+     height: 50px;
+     position: absolute;
+     right: 150px;
+     top: 15px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ .slash{ 
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 50px;
+  width: 8px;
+  height: 50px;
+  margin-top: 0;
+  padding-right: 12px;
+  padding-left: 9px;
+  color: white;
+}
+.rulan{ 
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 50px;
+  font-family: 'Inter', sans-serif;
+  padding-left: 5px;
+
+}
+
+.theme-for{ 
+  width: 45px;
+  height: 45px;
+  margin-top: 3px;
+  margin-left: 30px;
+  background: url(./assets/image/moon.svg) no-repeat 50% 50%;
+  background-size: cover;
+}
+.theme-for.active{ 
+  background: url(./assets/image/sun.svg) no-repeat 50% 50%;
+}
+.theme-for:hover { 
+  filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%)
+  contrast(87%);
+  cursor: pointer;
+}
+ .colors_input {
+     width: 100px;
+     height: 50px;
+     border: none;
+     outline: none;
+     background-color: transparent;
+ }
+ 
+ 
+ .keyboard_lights {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+ }
+  .key.key-backspace {
+   width: 134px;
+   font-size: 20px;
+ }
+ .key.key-backslash {
+   width: 107px;
+ }
+ .key.key-capslock {
+   display: flex;
+   width: 107px;
+   gap: 10px;
+   font-size: 20px;
+   line-height: 20px;
+   justify-content: flex-start;
+   text-align: center;
+ }
+ .key.key-capslock .caps_icon {
+   margin-left: 8px;
+   font-size: 40px;
+   color: #ffffff;
+ }
+ .key.key-capslock .caps_icon.caps_on {
+   color: #aaa4a4;
+   text-shadow: 0px 0px 7px #FFFFFF;
+ }
+
+ .key.key-leftshift {
+   width: 135px;
+ }
+ 
+ 
+.skill_title{ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding-top: 80px;
+}
+.skill_title-line{ 
+  width: 300px;
+  height: 2px;
+  background-color: #BDAE82;
+  border: none;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.skill_t{ 
+  color: #BDAE82;
+  font-size: 40px;
+  font-family: 'Merriweather', serif;
+  font-weight: bold;
+}
+.skills-cards { 
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.skills-card1{ 
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
