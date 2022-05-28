@@ -1,3 +1,5 @@
+// console.log('DARIA');
+
 const keyBoar = {
   init() {
     // Create main elements
